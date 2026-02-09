@@ -10,10 +10,11 @@ public class Transformation {
     private String action;
     private String outputString;
     private final String ANSWER_TEXT = "Ответ: ";
+    private final String RED_COLOR = "\u001B[31m";
 
     Transformation(String aString, String bString, String action){this.aString = aString; this.bString = bString; this.action = action;}
 
-    protected String definition() {
+    protected String definition(){
 
         try {
           a = Integer.parseInt(aString);
@@ -22,10 +23,10 @@ public class Transformation {
           if(checkingRange(a) && checkingRange(b)) {
               outputString = ANSWER_TEXT + calculation(a, b, action);
           } else{
-              outputString = "\u001B[31mЧисла на входе должны находиться в диапазоне целых чисел от 1 до 10.";
+              outputString = RED_COLOR + "Числа на входе должны находиться в диапазоне целых чисел от 1 до 10.";
           }
 
-        } catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe){
 
             Map<String, Integer> numbers = new HashMap<>();
             numbers.put("I", 1);
@@ -39,13 +40,17 @@ public class Transformation {
             numbers.put("IX", 9);
             numbers.put("X", 10);
 
-            for(Map.Entry<String, Integer> entry : numbers.entrySet()) {
-                if(entry.getValue().equals(calculation(numbers.get(aString), numbers.get(bString), action))){
-                    outputString = entry.getKey();
+            if (numbers.get(aString) != null && numbers.get(bString) != null) {
+                for (Map.Entry<String, Integer> entry : numbers.entrySet()) {
+                    if (entry.getValue().equals(calculation(numbers.get(aString), numbers.get(bString), action))) {
+                        outputString = entry.getKey();
+                    }
                 }
+            } else{
+            outputString = RED_COLOR + "Введённые значения не являются числами.";
             }
         }
-        if(outputString != null){return outputString;}else{return "\u001B[31mОшибка.";}
+        if(outputString != null){return outputString;}else{return RED_COLOR + "Ошибка.";}
     }
 
     private boolean checkingRange(int num){
@@ -60,7 +65,7 @@ public class Transformation {
             case "/": ansver = a / b; break;
             case "*": ansver = a * b; break;
             default:
-                System.out.println("\u001B[31mТакой операции не существует.");
+                System.out.println(RED_COLOR + "Такой операции не существует.");
         }
         return ansver;
     }
