@@ -1,6 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
-
+// Херня из под коня
 public class Transformation {
 
     private int a;
