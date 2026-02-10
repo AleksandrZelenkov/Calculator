@@ -18,7 +18,7 @@ class RomanNumeralsMap extends Transformation{
         for (String numDozens : DOZENS) {
             units.add(numDozens);
             for (int h = 0; h < 9; h++) {
-                units.add(numDozens + units.get(h));
+                units.add(numDozens.concat(units.get(h)));
             }
         }
     }
