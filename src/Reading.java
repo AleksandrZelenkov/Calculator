@@ -1,20 +1,22 @@
-public class Reading {
-    private String a;
-    private String b;
+class Reading {
+    private String aString;
+    private String bString;
     private String action;
+    private String input;
 
-    Reading(String input){
-        input = input;
+    Reading(String input){this.input = input;}
 
+    protected void split() throws CalculatorException{
         String[] strings = input.split(" ");
-        this.a = strings[0];
-        this.b = strings[2];
-        this.action = strings[1];
+
+        if(strings.length == 3){
+            aString = strings[0];
+            bString = strings[2];
+            action = strings[1];
+        } else {throw new CalculatorException("Вы ввели какую-то чушь.");}
     }
 
-    protected String getA(){return a;}
-    protected String getB(){return b;}
+    protected String getA(){return aString;}
+    protected String getB(){return bString;}
     protected String getAction(){return action;}
-
-
 }
