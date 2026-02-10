@@ -28,7 +28,7 @@ class RomanNumeralsMap extends Transformation{
         if (units.contains(aString) && units.contains(bString)) {
             if(units.lastIndexOf(aString) < 10 && units.lastIndexOf(bString) < 10){
                 answer = calculation(units.lastIndexOf(aString)+1, units.lastIndexOf(bString)+1, action)-1;
-                if(answer > 1){printAnswer(units.get(answer));
+                if(answer >= 0){printAnswer(units.get(answer));
                 } else {throw new CalculatorException("Увы, вы прошли всю математику.");}
             } else {throw new CalculatorException("Числа на входе должны находиться в диапазоне целых чисел от 1 до 10.");}
         } else {throw new CalculatorException("Введённые значения не являются числами.");}
